@@ -1,0 +1,29 @@
+{
+  "name": "group-chat",
+  "version": "1.0.0",
+  "description": "put all functionality code in js\r in html just mention id to grab them\r DOMContentloaded means no js code ll run till all html elements will be loaded",
+  "main": "app.js",
+  "dependencies": {
+    "@getbrevo/brevo": "^1.0.1",
+    "aws-sdk": "^2.1478.0",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mysql2": "^3.6.1",
+    "nodemon": "^3.0.1",
+    "sequelize": "^6.33.0",
+    "sib-api-v3-sdk": "^8.5.0",
+    "socket.io": "^4.7.2",
+    "socket.io-client": "^4.7.2",
+    "uuid": "^9.0.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "",
+  "license": "ISC"
+}
