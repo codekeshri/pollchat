@@ -1,6 +1,5 @@
 const socket = io("http://localhost:3000");
 const usertoken = localStorage.getItem("token");
-let activeGroupId = localStorage.getItem("activeGroupId");
 let userId = localStorage.getItem("userId");
 const feedback = document.getElementById("feedback");
 const message = document.getElementById("messageinput");
@@ -55,17 +54,6 @@ socket.on("typing", (data) => {
 const notificationArea = document.getElementById("notification-area");
 socket.on("new-notification", (data) => {
   if (notificationsEnabled) {
-    Notification.requestPermission().then((permission) => {
-      if (permission === "granted") {
-        const notification = new Notification(`${data.user}`, {
-          body: "messaged just now",
-        });
-        notification.addEventListener("err", (e) => {
-          alert("err");
-        });
-        console.log(data.user);
-      }
-    });
     notificationArea.innerHTML =
       "<p><em>" + data.user + " sent a new message...</em><p>";
     setTimeout(() => {
