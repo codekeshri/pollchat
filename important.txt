@@ -1,0 +1,8 @@
+For the smooth functioning of doughnut chart while setting up database it is advisable to initialize polls table with initial totalvotes values say 5 like below, id, index, createdAt, updatedAt like as mentioned below -
+
+id
+1	INC	0	5	2024-02-08 08:14:00	2024-02-09 10:21:17
+2	BJP	1	5	2024-02-08 08:14:00	2024-02-08 18:39:12
+3	AAP	2	5	2024-02-08 08:14:00	2024-02-08 18:39:05
+4	RJD	3	5	2024-02-08 08:14:00	2024-02-08 18:39:00
+					
