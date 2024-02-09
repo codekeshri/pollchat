@@ -54,6 +54,7 @@ socket.on("typing", (data) => {
 const notificationArea = document.getElementById("notification-area");
 socket.on("new-notification", (data) => {
   if (notificationsEnabled) {
+    main(data.user);
     notificationArea.innerHTML =
       "<p><em>" + data.user + " sent a new message...</em><p>";
     setTimeout(() => {
@@ -169,7 +170,7 @@ async function getAllMessagesFromDB() {
 async function sendMessageToServer() {
   const messageinput = document.getElementById("messageinput");
   const messageText = messageinput.value;
-  const message = {message: messageText, token: usertoken, activeGroupId};
+  const message = {message: messageText, token: usertoken};
   if (!usertoken) return;
   try {
     socket.emit("send-message", message);
@@ -258,3 +259,40 @@ async function deleteMessage(sender, message) {
     console.log(err);
   }
 }
+
+const checkPermission = () => {
+  if (!("serviceWorker" in navigator)) {
+    throw new Error("No support for service worker");
+  }
+
+  if (!("Notification" in window)) {
+    throw new Error("Notification API absent in window");
+  }
+};
+
+// registr service worker
+const registerSW = async () => {
+  const registration = await navigator.serviceWorker.register("sw.js");
+  return registration;
+};
+
+//use Notification api
+const requestPermission = async () => {
+  const permission = await Notification.requestPermission();
+  if (permission !== "granted") {
+    throw new Error("Notification permission is not granted");
+  } else {
+    // new Notification("C sent a new message");
+    // we want the notification command to be sent from sw
+    // for that we need access to sw registeration
+    // eventhough we are returinig the registration from the registerSW function it wont be able to access it in global scope as registration function is asynchronous
+  }
+};
+
+const main = async (data) => {
+  checkPermission();
+  const reg = await registerSW();
+  console.log(reg);
+  reg.showNotification(`${data} sent a new message`);
+  requestPermission(); //need to call only once
+};
